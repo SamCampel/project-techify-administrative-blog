@@ -16,10 +16,12 @@ const User = require("./users/User");
 app.set('view engine','ejs');
 
 // Sessions
-
 app.use(session({
-    secret: "qualquercoisa", cookie: { maxAge: 30000000 }
-}))
+    secret: "qualquercoisa",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 30000000 }
+}));
 
 // Static
 app.use(express.static('public'));
@@ -38,6 +40,13 @@ connection
         console.log(error);
     })
 
+connection.sync({ force: false })
+    .then(() => {
+        console.log("Tabelas sincronizadas!");
+    })
+    .catch((error) => {
+        console.log("Erro ao sincronizar tabelas:", error);
+    });
 
 app.use("/",categoriesController);    
 app.use("/",articlesController);
