@@ -1,44 +1,33 @@
-<%- include partials/header.ejs %>
-<%- include partials/homenavbar.ejs %>
-<body>
-    <div class="container">
-        <hr>
-        <div class="jumbotron">
-            <h1 class="display-4">Bem-vindo ao Techify</h1>
-            <p class="lead">Leia e publique artigos sobre o mundo da programação</p>
-            <hr class="my-4">
-          </div>
-        <hr>
-        <% articles.forEach(article => { %>
-            <div class="card">
-                <div class="card-header">
-                    <h2><%= article.title %></h2>
-                </div>
-                <div class="card-body">
-                    <a href="/<%= article.slug %>" class="btn btn-warning">Ler artigo</a>
-                </div>
-            </div>
-            <br>
-        <% }) %>
+<%- include('partials/header.ejs') %>
+<%- include('partials/homenavbar.ejs') %>
 
-        <div class="row">
-            <div class="col col-12">
-                <a style="float:right" href="/articles/page/2">Next >>></a>
+<div class="container">
+    <hr>
+    <div class="jumbotron">
+        <h1 class="display-4">Bem-vindo ao Techify</h1>
+        <p class="lead">Leia e publique artigos sobre o mundo da programação</p>
+        <hr class="my-4">
+    </div>
+    <hr>
+    <% articles.forEach(article => { %>
+        <div class="card">
+            <div class="card-header">
+                <h2><%= article.title %></h2>
             </div>
-            <hr>
+            <div class="card-body">
+                <a href="/<%= article.slug %>" class="btn btn-warning">Ler artigo</a>
+            </div>
+        </div>
+        <br>
+    <% }) %>
+
+    <div class="row">
+        <div class="col col-12">
+            <a style="float:right" href="/articles/page/2">Next >>></a>
         </div>
         <hr>
     </div>
+    <hr>
+</div>
 
-    <% var unidade = { uf: "RJ"} %>
-
-    <select>
-        <option value="RN" <% if(unidade.uf === 'RN') { %> selected <% } %>>RN</option>
-        <option value="RJ" <% if(unidade.uf === 'RJ') { %> selected <% } %>>RJ</option>
-        <option value="RR" <% if(unidade.uf === 'RR') { %> selected <% } %>>RR</option>
-        <option value="RS" <% if(unidade.uf === 'RS') { %> selected <% } %>>RS</option>
-    </select>
-
-</body>
-
-<%- include partials/footer.ejs %>
+<%- include('partials/footer.ejs') %>

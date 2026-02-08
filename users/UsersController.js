@@ -2,15 +2,20 @@ const express = require("express");
 const router = express.Router();
 const User = require("./User");
 const bcrypt = require('bcryptjs');
+const Category = require("../categories/Category")
 
 router.get("/admin/users", (req, res) => {
     User.findAll().then(users => {
-        res.render("admin/users/index",{users: users});
+        Category.findAll().then(categories => {
+            res.render("admin/users/index", { users: users, categories: categories });
+        });
     });
 });
 
-router.get("/admin/users/create",(req, res) => {
-    res.render("admin/users/create");
+router.get("/admin/users/create", (req, res) => {
+    Category.findAll().then(categories => {
+        res.render("admin/users/create", { categories: categories });
+    });
 });
 
 router.post("/users/create", (req, res) => {
@@ -61,10 +66,10 @@ router.post("/users/delete", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    res.render("admin/users/login");
+    Category.findAll().then(categories => {
+        res.render("admin/users/login", { categories: categories });
+    });
 });
-
-
 
 router.post("/authenticate", (req, res) => {
 
