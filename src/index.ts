@@ -6,6 +6,7 @@ import connection from "./database/database";
 import categoriesController from "./categories/CategoriesController";
 import articlesController from "./articles/ArticlesController";
 import usersController from "./users/UsersController";
+import adminAuth from "./middlewares/adminAuth";
 import Article from "./articles/Article";
 import Category from "./categories/Category";
 
@@ -24,6 +25,8 @@ app.use(session({
 app.use(express.static(path.join(rootDirectory, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use("/admin", adminAuth);
 
 app.use("/", categoriesController);
 app.use("/", articlesController);

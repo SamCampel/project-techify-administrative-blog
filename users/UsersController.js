@@ -88,7 +88,8 @@ router.post("/authenticate", (req, res) => {
             if(correct){
                 req.session.user = {
                     id: user.id,
-                    email: user.email
+                    email: user.email,
+                    isAdmin: true
                 }
                 res.redirect("/admin/articles");
             }else{

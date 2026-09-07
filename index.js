@@ -25,7 +25,7 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-    res.locals.isAdmin = !!req.session && !!req.session.user;
+    res.locals.isAdmin = !!req.session && !!req.session.user && req.session.user.isAdmin === true;
     next();
 });
 
@@ -53,6 +53,9 @@ connection.sync({ force: false })
     .catch((error) => {
         console.log("Erro ao sincronizar tabelas:", error);
     });
+
+// Protect every current and future route under the admin namespace.
+app.use("/admin", adminAuth);
 
 app.use("/",categoriesController);    
 app.use("/",articlesController);

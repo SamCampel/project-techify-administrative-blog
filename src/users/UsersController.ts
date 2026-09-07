@@ -63,7 +63,7 @@ router.post("/authenticate", (req, res) => {
       (user.password === password || bcrypt.compareSync(password, user.password));
 
     if (user !== null && isValidPassword) {
-      req.session.user = { id: user.id, email: user.email };
+      req.session.user = { id: user.id, email: user.email, isAdmin: true };
       res.redirect("/admin/articles");
     } else {
       res.redirect("/login");
