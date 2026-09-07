@@ -78,8 +78,12 @@ router.post("/authenticate", (req, res) => {
 
     User.findOne({where:{email: email}}).then(user => {
         if(user != undefined){ // Se existe um usuário com esse e-mail
-            // Validar senha
-            var correct = bcrypt.compareSync(password,user.password);
+            // Validar senha, aceitando hashes bcrypt e senhas legadas em texto puro
+            var correct = false;
+
+            if (typeof user.password === 'string') {
+                correct = user.password === password || bcrypt.compareSync(password, user.password);
+            }
 
             if(correct){
                 req.session.user = {

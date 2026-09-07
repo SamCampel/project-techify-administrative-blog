@@ -1,0 +1,57 @@
+<%- include('../../partials/header.ejs') %>
+<%- include('../../partials/adminnavbar.ejs') %>
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1">Dashboard Administrativo</h2>
+            <p class="text-muted mb-0">Resumo geral do blog e do painel administrativo</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-uppercase small text-muted">Artigos publicados</div>
+                            <h3 class="mt-2 mb-0"><%= totalArticles %></h3>
+                        </div>
+                        <span class="badge badge-primary">Artigos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-uppercase small text-muted">Usuários</div>
+                            <h3 class="mt-2 mb-0"><%= totalUsers %></h3>
+                        </div>
+                        <span class="badge badge-success">Usuários</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="text-uppercase small text-muted">Categorias</div>
+                            <h3 class="mt-2 mb-0"><%= totalCategories %></h3>
+                        </div>
+                        <span class="badge badge-warning">Categorias</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>

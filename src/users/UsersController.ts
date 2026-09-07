@@ -59,7 +59,10 @@ router.post("/authenticate", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   User.findOne({ where: { email } }).then((user: any) => {
-    if (user !== null && bcrypt.compareSync(password, user.password)) {
+    const isValidPassword = !!user && typeof user.password === "string" &&
+      (user.password === password || bcrypt.compareSync(password, user.password));
+
+    if (user !== null && isValidPassword) {
       req.session.user = { id: user.id, email: user.email };
       res.redirect("/admin/articles");
     } else {

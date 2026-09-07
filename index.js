@@ -7,6 +7,7 @@ const connection = require("./database/database");
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArticlesController");
 const usersController = require("./users/UsersController");
+const adminAuth = require("./middlewares/adminAuth");
 
 const Article = require("./articles/Article");
 const Category = require("./categories/Category");
@@ -22,6 +23,11 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 30000000 }
 }));
+
+app.use((req, res, next) => {
+    res.locals.isAdmin = !!req.session && !!req.session.user;
+    next();
+});
 
 // Static
 app.use(express.static('public'));
@@ -52,6 +58,19 @@ app.use("/",categoriesController);
 app.use("/",articlesController);
 app.use("/",usersController);
 
+app.get("/admin/dashboard", adminAuth, (req, res) => {
+    Article.count().then(totalArticles => {
+        User.count().then(totalUsers => {
+            Category.count().then(totalCategories => {
+                res.render("admin/dashboard/index", {
+                    totalArticles,
+                    totalUsers,
+                    totalCategories
+                });
+            });
+        });
+    });
+});
 
 app.get("/", (req, res) => {
     Article.findAll({

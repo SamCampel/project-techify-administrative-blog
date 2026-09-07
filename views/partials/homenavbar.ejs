@@ -9,6 +9,20 @@
             <a class="nav-link" href="/">Home</a>
         </li>
 
+        <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">Categorias</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/articles">Artigos</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/users">Usuários</a>
+            </li>
+        <% } %>
+
         <% if (typeof categories !== 'undefined' && categories) { %>
             <% categories.forEach(category => { %>
                 <li class="nav-item">
